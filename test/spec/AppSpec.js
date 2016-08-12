@@ -27,9 +27,16 @@ describe('App', function() {
     expect(app.get('currentSong')).to.equal(app.get('library').at(0));
   });
 
-  xit('queues the next song when an "enqueue" event is fired', function() {
+  it('queues the next song when an "enqueue" event is fired', function() {
     app.get('library').at(1).enqueue();
     expect(app.get('songQueue').at(0)).to.equal(app.get('library').at(1));
+  });
+
+  it('the ability for users to remove tracks from the song queue.', function() {
+    app.get('library').at(1).enqueue();
+    expect(app.get('songQueue').at(0)).to.equal(app.get('library').at(1));
+    app.get('songQueue').at(0).dequeue();
+    expect(app.get('songQueue').at(0)).to.equal(undefined);
   });
 
 });
